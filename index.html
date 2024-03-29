@@ -3,12 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CalendarWithFriends</title>
+    
+    <title>
+        CalendarWithFriends
+    </title>
 </head>
 <body>
+    <p style="font-size:1px; color:#F23C1E; font-weight:bold; font-style:italic;">
+        Enter the competition by 
+        <span style="color: #0017C2">January 30, 2011</span>
+        and you could win up to $$$$ — including amazing 
+        <span style="color: #6314C2">summer</span> 
+        trips!
+        <span style="color: #187AC2;"> Here is the watering Hole!#$</span>
+        <span style="color: #F0B73F;"> Here is the watering Hole!#$</span>
+        <span style="color: #F07A40;"> Here is the watering Hole!#$</span>
+    </p>
     <!-- Use header, main, and footer elements to give semantic structure -->
     <header>
-      <h1>CalendarWithFriends</h1>
+      <h1 style="color: #F23C1E;">CalendarWithFriends</h1>
 
       <!-- Navigation elements -->
       <nav>
@@ -16,6 +29,7 @@
         <menu>
           <li><a href="index.html">Login</a></li>
           <li><a href="events.html">Events</a></li>
+          <img src="images/ring.jpg" width="500">
         </menu>
       </nav>
 
@@ -24,11 +38,24 @@
     </header>
 
     <main>
-      <h1>Welcome</h1>
-      <p>Login to play</p>
+      <h1>
+        <p
+        style="font-size:36px; color:#F07A40; font-weight:bold;">
+        Welcome to the Best Calendar in the World
+        </p>
+      </h1>
+        <p style="font-size:25px;" >Login</p>
       <form method="get" action="play.html">
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Your name here" />
+        <label for="name">UserName</label>
+        <br>
+        <input type="text" id="name" placeholder="Username" />
+        <br><br>
+      </form>
+      <form method="get" action="play.html">
+        <label for="name">Password</label>
+        <br>
+        <input type="text" id="name" placeholder="Password" />
+        <br>
         <button type="submit">Login</button>
       </form>
     </main>
