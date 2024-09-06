@@ -37,6 +37,6 @@ Here is a sequence diagram that shows how to people would interact with the back
 - 10% Application textual content: 
 - 10% Placeholder for 3rd party service calls: added Add Event button.
 - 10% Application images: Added a few images that I wont be using in the end result.
-- 10% Login placeholder, including user name display
+- 10% Login placeholder, including user name display: added two boxes for username and password, and a submit button
 - 10% Database data placeholder showing content stored in the database
-- 10% WebSocket data placeholder showing where realtime communication will go
+- 10% WebSocket data placeholder showing where realtime communication will go: 
