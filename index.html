@@ -1,107 +1,53 @@
 <!DOCTYPE html>
-<htm lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell browsers not to scale the viewport automatically -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Web Programming 260</title>
-    <style>
-      * {
-        box-sizing: border-box;
-        font-family: Arial, sans-serif;
-        margin: 0;
-      }
-      main {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        font-size: 3vw;
-        animation: fly-in 1s ease-out;
-      }
-
-      .large {
-        display: block;
-      }
-
-      p {
-        font-size: 2em;
-        display: flex;
-        color: #ca0a0a;
-      }
-
-      .course {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .courseName {
-        margin: 0.25em;
-        font-size: 3em;
-        font-weight: bold;
-        color: #111;
-      }
-      .courseNum {
-        margin: 0.25em;
-        font-size: 3em;
-        color: #032eee;
-      }
-
-      .small {
-        display: none;
-        font-size: 30vw;
-        color: #f7a204;
-      }
-
-      @keyframes fly-in {
-        0% {
-          transform: translateX(-200%);
-        }
-        80% {
-          transform: translateX(1%);
-        }
-        100% {
-          transform: translateX(0%);
-        }
-      }
-
-      @media (max-width: 500px) {
-        body {
-          background-color: rgb(23, 23, 23);
-        }
-        .large {
-          display: none;
-        }
-        .small {
-          display: block;
-        }
-      }
-    </style>
+    <title>Simon HTML</title>
+    <link rel="icon" href="favicon.ico" />
   </head>
-
   <body>
+    <!-- Use header, main, and footer elements to give semantic structure -->
+    <header>
+      <h1>Simon Clement<sup>&reg;</sup></h1>
+
+      <!-- Navigation elements -->
+      <nav>
+        <!-- Menu is a semantic alternative to <ul> that represents an interaction -->
+        <menu>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="play.html">Play</a></li>
+          <li><a href="scores.html">Scores</a></li>
+          <li><a href="about.html">About</a></li>
+        </menu>
+      </nav>
+
+      <!-- Since we don't have the ability to style we use old style HTML to give some visual formatting -->
+      <hr />
+    </header>
+
     <main>
-      <div class="large">
-        <p>Welcome to your</p>
-        <div class="course">
-          <div class="courseName">Web<br />Programming</div>
-          <div class="courseNum">260</div>
+      <h1>Welcome to Simon</h1>
+      <form method="get" action="play.html">
+        <div>
+          <span>@</span>
+          <input type="text" placeholder="your@email.com" />
         </div>
-        <p id="serviceName">website</p>
-      </div>
-      <div class="small">260</div>
+        <div>
+          <span>🔒</span>
+          <input type="password" placeholder="password" />
+        </div>
+        <button type="submit">Login</button>
+        <button type="submit">Create</button>
+      </form>
     </main>
+
+    <footer>
+      <hr />
+      <span class="text-reset">Author Name(s)</span>
+      <br />
+      <a href="https://github.com/webprogramming260/simon-html">GitHub</a>
+    </footer>
   </body>
-  
-  <footer>
-    <form action="submission.html" method="post">
-      <label for="ta">TextArea: </label>
-      <textarea id="ta" name="ta-id">
-    Some text
-      </textarea>
-      <button type="submit">Submit</button>
-    </form>
-  </footer>
 </html>
