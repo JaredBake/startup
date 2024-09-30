@@ -1,10 +1,10 @@
 I leanred that the readme.md file was all caps. 
 
-The website IP address for startup is 34.232.133.172
-I made it out to be an elastic so it should not change until I change it. 
+The elastic IP address for startup is 34.232.133.172
 
+ssh -i C:\Users\18jab\CS260\Production.pem ubuntu@bakecs260.click
 
-ssh -i C:\Users\18jab\CS260\Production.pem ubuntu@34.232.133.172
+Deploy Files Command: ./deployFiles.sh -k ../production.pem -h bakecs260.click -s startup
 
 3rd party server is when I get info from another website and use it in mine
 
