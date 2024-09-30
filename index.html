@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Placeholder Layout with Plus Button</title>
+    <title>Calendar with Month Switcher</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            text-align: center;
         }
 
         header {
@@ -51,6 +52,29 @@
             color: #333;
         }
 
+        .month-switcher {
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .arrow {
+            font-size: 2em;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .month-display {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .arrow:hover {
+            color: #4a90e2;
+        }
+
         .add-button {
             position: fixed;
             bottom: 20px;
@@ -68,7 +92,6 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        /* Hover effect for plus button */
         .add-button:hover {
             background-color: #357ab7;
         }
@@ -81,20 +104,90 @@
         <button class="login-btn">Login</button>
     </header>
 
+    <!-- Month Switcher -->
+    <div class="month-switcher">
+        <span class="arrow" id="prev-month">&#8592;</span> <!-- Left Arrow -->
+        <span class="month-display" id="current-month">January</span>
+        <span class="arrow" id="next-month">&#8594;</span> <!-- Right Arrow -->
+    </div>
+
     <!-- Container for Dates and Times -->
     <div class="container">
         <h2>Upcoming Events</h2>
-        <ul>
-            <li>October 1, 2024 - 10:00 AM</li>
-            <li>October 5, 2024 - 2:30 PM</li>
-            <li>October 10, 2024 - 9:00 AM</li>
-            <li>October 15, 2024 - 1:45 PM</li>
-            <li>October 20, 2024 - 11:15 AM</li>
+        <ul id="date-list">
+            <!-- Dates will be dynamically inserted here -->
         </ul>
     </div>
 
     <!-- Plus Button in Bottom Right -->
     <button class="add-button">+</button>
+
+    <script>
+        // List of months
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
+
+        // Predefined dates for each month
+        const events = {
+            "January": ["January 1, 2024 - 10:00 AM", "January 10, 2024 - 2:00 PM"],
+            "February": ["February 5, 2024 - 1:30 PM", "February 14, 2024 - 4:00 PM"],
+            "March": ["March 3, 2024 - 12:00 PM", "March 21, 2024 - 3:30 PM"],
+            "April": ["April 9, 2024 - 9:30 AM", "April 18, 2024 - 2:45 PM"],
+            "May": ["May 7, 2024 - 10:15 AM", "May 28, 2024 - 1:45 PM"],
+            "June": ["June 1, 2024 - 9:00 AM", "June 15, 2024 - 2:30 PM"],
+            "July": ["July 10, 2024 - 11:00 AM", "July 20, 2024 - 3:00 PM"],
+            "August": ["August 5, 2024 - 12:00 PM", "August 25, 2024 - 4:00 PM"],
+            "September": ["September 8, 2024 - 10:45 AM", "September 30, 2024 - 3:15 PM"],
+            "October": ["October 3, 2024 - 11:30 AM", "October 15, 2024 - 2:00 PM"],
+            "November": ["November 9, 2024 - 10:30 AM", "November 22, 2024 - 1:30 PM"],
+            "December": ["December 12, 2024 - 10:00 AM", "December 25, 2024 - 3:30 PM"]
+        };
+
+        let currentMonthIndex = 0;
+        const monthDisplay = document.getElementById('current-month');
+        const dateList = document.getElementById('date-list');
+        const prevMonthButton = document.getElementById('prev-month');
+        const nextMonthButton = document.getElementById('next-month');
+
+        // Update the displayed month and the event dates
+        function updateMonth() {
+            const currentMonth = months[currentMonthIndex];
+            monthDisplay.textContent = currentMonth;
+            dateList.innerHTML = ""; // Clear the current list
+
+            // Populate the date list with the corresponding events
+            events[currentMonth].forEach(event => {
+                const li = document.createElement('li');
+                li.textContent = event;
+                dateList.appendChild(li);
+            });
+        }
+
+        // Previous month button click
+        prevMonthButton.addEventListener('click', () => {
+            if (currentMonthIndex === 0) {
+                currentMonthIndex = months.length - 1; // Go to December
+            } else {
+                currentMonthIndex--;
+            }
+            updateMonth();
+        });
+
+        // Next month button click
+        nextMonthButton.addEventListener('click', () => {
+            if (currentMonthIndex === months.length - 1) {
+                currentMonthIndex = 0; // Go to January
+            } else {
+                currentMonthIndex++;
+            }
+            updateMonth();
+        });
+
+        // Initial display
+        updateMonth();
+    </script>
 
 </body>
 </html>
