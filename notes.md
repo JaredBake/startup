@@ -9,3 +9,7 @@ Deploy Files Command: ./deployFiles.sh -k ../production.pem -h bakecs260.click -
 3rd party server is when I get info from another website and use it in mine
 
 Websocket is the connection to each device that is using my website
+    - the lists under the month name is the information that I will be getting from the websocket interaction
+
+My third Party service calls will be the current date and time displayed on the top of the screen
+
