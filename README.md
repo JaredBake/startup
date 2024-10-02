@@ -17,11 +17,13 @@ Here is a sequence diagram that shows how to people would interact with the back
 - Updates new events added in real time
 - Events are persistently stored
 - Ability for admin to create or delete group calenders
+- When adding event you can set a level of certainty that the event will happen based on color
 
 ## Technologies
 - **HTML** - Uses correct HTML structure for application. Two HTML pages. One for login and one for viewing and editing calender.
 - **CSS** - Application styling that looks good on different screen sizes, uses good whitespace, color choice and contrast.
 - **JavaScript** - Provides login, choice display, adding events, display other users events added, backend endpoint calls.
+- **3rd Party** - Retrieve the current date and displayed on top of page
 - **Service** - Backend service with endpoints for:
   - login
   - retrieving list of events

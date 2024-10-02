@@ -17,9 +17,9 @@
         header {
             background-color: #4a90e2;
             padding: 20px;
-            text-align: right;
             text-shadow: #050505;
-            box-shadow: #050505;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: right;
         }
 
         .login-btn {
@@ -30,6 +30,7 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 1000px;
+            text-align: right;
         }
         .github-btn {
             background-color: #ffffff;
@@ -39,7 +40,7 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 1000px;
-            align-items: center;
+            text-align: center;
         }
 
         .container {
@@ -47,7 +48,6 @@
         }
         h1{
             color:#06060c
-            
         }
 
         h2 {
@@ -80,6 +80,15 @@
             font-size: 2em;
             cursor: pointer;
             user-select: none;
+            position: fixed;
+        }
+
+        .left-arrow {
+            left: 725px;
+        }
+
+        .right-arrow {
+            right: 725px;
         }
 
         .month-display {
@@ -111,30 +120,37 @@
         .add-button:hover {
             background-color: #357ab7;
         }
-        img {
-            width: 50%; /* Make the image take up the full width of the page */
-            height: 50%; /* Maintain aspect ratio */
+        .image-container {
+            display: flex;
+            justify-content: space-between; /* Space between images, or use 'center' or 'flex-start' */
+            gap: 20px; /* Optional: controls the space between the images */
+        }
+
+        .image-container img {
+            max-width: 50%; /* Adjusts the size of the images to fit side by side */
+            height: auto;   /* Keeps the aspect ratio of the images */
         }
     </style>
+    
+
+    
     <!-- Header with Login Button -->
     <header>
-        <div>
-            <h1>Jared Bake</h1>
-        </div>
         <div class="button-container">
             <a href="login.html" class="login-btn">Login</a>
             <a href="https://github.com/JaredBake/startup" class="github-btn">GitHub</a>
         </div>
-        
     </header>
+    <h1>Jared Bake</h1>
+    <div>September 28, 2024</div>
 </head>
 
 <body>
     <!-- Month Switcher -->
     <div class="month-switcher">
-        <span class="arrow" id="prev-month">&#8592;</span> <!-- Left Arrow -->
+        <span class="arrow left-arrow" id="prev-month">&#8592;</span> <!-- Left Arrow -->
         <span class="month-display" id="current-month">January</span>
-        <span class="arrow" id="next-month">&#8594;</span> <!-- Right Arrow -->
+        <span class="arrow right-arrow" id="next-month">&#8594;</span> <!-- Right Arrow -->
     </div>
 
     <!-- Container for Dates and Times -->
@@ -215,7 +231,10 @@
         updateMonth();
         
     </script>
-    <p>Heroes is a great game</p>
-    <img src="haloimage.webp">
+    <div class="image-container">
+        <img src="haloimage.webp">
+        <img src="Eldenring.jpg">
+    </div>
+
 </body>
 </html>
