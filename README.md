@@ -24,7 +24,7 @@ Here is a sequence diagram that shows how to people would interact with the back
 - **JavaScript** - Provides login, choice display, adding events, display other users events added, backend endpoint calls.
 - **Service** - Backend service with endpoints for:
   - login
-  - retrieving calender
+  - retrieving list of events
   - submitting new events
   - retrieving new events made by others
 - **DB/Login** - Store users, calenders, and events in database. Register and login users. Credentials securely stored in database. Can't create or edit event unless authenticated.

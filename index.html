@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendar with Month Switcher</title>
+    <title>HomePage</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -16,8 +16,10 @@
 
         header {
             background-color: #4a90e2;
-            padding: 15px;
+            padding: 20px;
             text-align: right;
+            text-shadow: #050505;
+            box-shadow: #050505;
         }
 
         .login-btn {
@@ -37,13 +39,15 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 1000px;
+            align-items: center;
         }
 
         .container {
             padding: 20px;
         }
         h1{
-            color:#0b0bd7
+            color:#06060c
+            
         }
 
         h2 {
@@ -112,18 +116,20 @@
             height: 50%; /* Maintain aspect ratio */
         }
     </style>
-</head>
-
-<body>
     <!-- Header with Login Button -->
     <header>
+        <div>
+            <h1>Jared Bake</h1>
+        </div>
         <div class="button-container">
             <a href="login.html" class="login-btn">Login</a>
             <a href="https://github.com/JaredBake/startup" class="github-btn">GitHub</a>
         </div>
+        
     </header>
-    <h1>Jared Bake</h1>
+</head>
 
+<body>
     <!-- Month Switcher -->
     <div class="month-switcher">
         <span class="arrow" id="prev-month">&#8592;</span> <!-- Left Arrow -->
@@ -209,6 +215,7 @@
         updateMonth();
         
     </script>
+    <p>Heroes is a great game</p>
     <img src="haloimage.webp">
 </body>
 </html>
