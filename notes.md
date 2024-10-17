@@ -14,3 +14,21 @@ Websocket is the connection to each device that is using my website
 My third Party service calls will be the current date and time displayed on the top of the screen.
 
 #px is a small measurement of distance on the screen and the #em is a larger type of measurement.
+
+
+There is a part of code that makes the sections spaced in a certain way. 
+    section:nth-child(1) {
+        flex: 1;
+        background-color: hsl(180, 10%, 80%);
+    }
+    section:nth-child(2) {
+        flex: 3;
+        background-color: white;
+    }
+    section:nth-child(3){
+        flex: 1;
+        background-color: rgb(220, 202, 0);
+    }
+
+
+    
