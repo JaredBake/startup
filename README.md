@@ -32,3 +32,10 @@ Here is a sequence diagram that shows how to people would interact with the back
 - **DB/Login** - Store users, calenders, and events in database. Register and login users. Credentials securely stored in database. Can't create or edit event unless authenticated.
 - **WebSocket** - As each user creates a new event, their events are broadcast to all other users.
 - **React** - Application ported to use the React web framework.
+
+## Recent Additions
+- **Style** - Added buttons for adding event, login, Github access.
+- Three images where added that will auto fill the page depending on the size of the webpage.
+- Events will have different colors the user can assign to show the different levels of how confident they are the this event will take place at this time and place.
+- Created header for the buttons login and github, and added arrows that allow for cycling through months of the year while staying in the same spot on the page but auto adjusting depending on the size.
+- Need to create logic that will allow for adding of events and then auto sort the event to the desired month.
