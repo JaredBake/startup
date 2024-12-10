@@ -19,7 +19,6 @@
             padding: 20px;
             text-shadow: #050505;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            text-align: right;
         }
 
         .login-btn {
@@ -30,8 +29,17 @@
             font-size: 16px;
             cursor: pointer;
             border-radius: 1000px;
-            text-align: right;
+            text-align: center;
         }
+        .logout-btn-container {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         .github-btn {
             background-color: #ffffff;
             border: 2px solid #050505;
@@ -46,8 +54,9 @@
         .container {
             padding: 20px;
         }
-        h1{
-            color:#06060c
+
+        h1 {
+            color: #06060c;
         }
 
         h2 {
@@ -120,59 +129,70 @@
         .add-button:hover {
             background-color: #357ab7;
         }
+
         .image-container {
             display: flex;
-            justify-content: space-between; /* Space between images, or use 'center' or 'flex-start' */
-            gap: 20px; /* Optional: controls the space between the images */
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .image-container img {
-            max-width: 50%; /* Adjusts the size of the images to fit side by side */
-            height: auto;   /* Keeps the aspect ratio of the images */
+            max-width: 50%;
+            height: auto;
+        }
+
+        .user-info {
+            margin-left: 20px;
+            color: white;
         }
     </style>
-    
-
-    
-    <!-- Header with Login Button -->
-    <header>
-        <div class="button-container">
-            <a href="login/login.html" class="login-btn">Login</a>
-            <a href="https://github.com/JaredBake/startup" class="github-btn">GitHub</a>
-        </div>
-    </header>
-    
 </head>
 
 <body>
+    <header>
+        <div class="user-info" id="user-info"></div>
+        <div class="button-container">
+            <a href="/src/login/login.html" class="login-btn" id="login-btn">Login</a>
+        </div>
+        <div id="username-display" style="color: white; font-size: 18px;"></div>
+        <div id="logout-btn-container">
+            <button id="logout-btn" style="background-color: #e74c3c; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Logout</button>
+        </div>
+    </header>
+    
     <h1>Jared Bake</h1>
     <div>September 28, 2024</div>
-    <!-- Month Switcher -->
+    
     <div class="month-switcher">
-        <span class="arrow left-arrow" id="prev-month">&#8592;</span> <!-- Left Arrow -->
+        <span class="arrow left-arrow" id="prev-month">&#8592;</span>
         <span class="month-display" id="current-month">January</span>
-        <span class="arrow right-arrow" id="next-month">&#8594;</span> <!-- Right Arrow -->
+        <span class="arrow right-arrow" id="next-month">&#8594;</span>
     </div>
 
-    <!-- Container for Dates and Times -->
     <div class="container">
         <h2>Upcoming Events</h2>
-        <ul id="date-list">
-            <!-- Dates will be dynamically inserted here -->
-        </ul>
+        <ul id="date-list"></ul>
     </div>
 
-    <!-- Plus Button in Bottom Right -->
     <button class="add-button">+</button>
 
+    <div class="image-container">
+        <img src="public/haloimage.webp" alt="Halo Image">
+        <img src="public/Eldenring.jpg" alt="Eldenring Image">
+    </div>
+
+    <footer>
+        <div class="button-container">
+            <a href="https://github.com/JaredBake/startup" class="github-btn">GitHub</a>
+        </div>
+    </footer>
+
     <script>
-        // List of months
         const months = [
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
         ];
 
-        // Predefined dates for each month
         const events = {
             "January": ["January 1, 2024 - 10:00 AM", "January 10, 2024 - 2:00 PM"],
             "February": ["February 5, 2024 - 1:30 PM", "February 14, 2024 - 4:00 PM"],
@@ -193,14 +213,17 @@
         const dateList = document.getElementById('date-list');
         const prevMonthButton = document.getElementById('prev-month');
         const nextMonthButton = document.getElementById('next-month');
+        const loginBtn = document.getElementById('login-btn');
+        const userInfo = document.getElementById('user-info');
+        const logoutBtnContainer = document.getElementById('logout-btn-container');
+        const logoutBtn = document.getElementById('logout-btn');
 
         // Update the displayed month and the event dates
         function updateMonth() {
             const currentMonth = months[currentMonthIndex];
             monthDisplay.textContent = currentMonth;
-            dateList.innerHTML = ""; // Clear the current list
+            dateList.innerHTML = "";
 
-            // Populate the date list with the corresponding events
             events[currentMonth].forEach(event => {
                 const li = document.createElement('li');
                 li.textContent = event;
@@ -211,7 +234,7 @@
         // Previous month button click
         prevMonthButton.addEventListener('click', () => {
             if (currentMonthIndex === 0) {
-                currentMonthIndex = months.length - 1; // Go to December
+                currentMonthIndex = months.length - 1;
             } else {
                 currentMonthIndex--;
             }
@@ -221,21 +244,40 @@
         // Next month button click
         nextMonthButton.addEventListener('click', () => {
             if (currentMonthIndex === months.length - 1) {
-                currentMonthIndex = 0; // Go to January
+                currentMonthIndex = 0;
             } else {
                 currentMonthIndex++;
             }
             updateMonth();
         });
 
+        // Check login status and update UI
+        function checkLoginStatus() {
+            const loggedInUser = localStorage.getItem('loggedInUser');
+            if (loggedInUser) {
+                userInfo.textContent = `Hello, ${loggedInUser}!`;
+                loginBtn.style.display = 'none';
+                logoutBtnContainer.style.display = 'block';  // Show logout button
+            } else {
+                loginBtn.style.display = 'block';
+                logoutBtnContainer.style.display = 'none';  // Hide logout button
+            }
+        }
+
+        // Logout the user
+        function handleLogout() {
+            // Remove user data from localStorage
+            localStorage.removeItem('loggedInUser');
+            // Reload the page to reflect the changes
+            window.location.reload();
+        }
+
+        // Attach the logout handler to the logout button
+        logoutBtn.addEventListener('click', handleLogout);
+
         // Initial display
         updateMonth();
-        
+        checkLoginStatus();
     </script>
-    <div class="image-container">
-        <img src="haloimage.webp">
-        <img src="Eldenring.jpg">
-    </div>
-
 </body>
 </html>

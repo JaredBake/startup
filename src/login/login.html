@@ -5,73 +5,101 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <style>
-        /* Your existing styles here */
-    </style>
-    <!-- React & ReactDOM CDN -->
-    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-
-    <!-- Babel CDN for JSX support -->
-    <script src="https://unpkg.com/@babel/standalone"></script>
-
-    <!-- Script to handle the Login React Component -->
-    <script type="text/babel">
-        // React component for login
-        function LoginForm() {
-            const [username, setUsername] = React.useState('');
-            const [password, setPassword] = React.useState('');
-            const [error, setError] = React.useState('');
-
-            // Handle form submission
-            function handleSubmit(event) {
-                event.preventDefault();
-
-                // Simple validation
-                if (!username || !password) {
-                    setError('Please fill in both fields.');
-                    return;
-                }
-
-                // Simulate login by storing the username in localStorage
-                localStorage.setItem('loggedInUser', username);
-
-                // Redirect to the homepage
-                window.location.href = '../../index.html';
-            }
-
-            return (
-                <div className="form-container">
-                    <form onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username:</label>
-                        <input
-                            type="text"
-                            id="username"
-                            name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            required
-                        />
-
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                        />
-
-                        {error && <div style={{ color: 'red' }}>{error}</div>}
-
-                        <button type="submit">Submit</button>
-                    </form>
-                </div>
-            );
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-align: center;
         }
 
-        // Render the LoginForm component
-        ReactDOM.render(<LoginForm />, document.getElementById('root'));
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            font-size: 24px;
+        }
+
+        .form-container {
+            background-color: #4a90e2;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 50px auto;
+            border-radius: 10px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-size: 16px;
+            color: white;
+            text-align: left;
+        }
+
+        input {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .links {
+            text-align: right;
+            background-color: #000000;
+            padding: 20px;
+        }
+
+        .home-btn {
+            background-color: #ffffff;
+            border: 2px solid #000793;
+            color: #030096;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 100px;
+        }
+    </style>
+    <script>
+        // JavaScript for handling form submission
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+
+            // Get username and password values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Simple validation
+            if (!username || !password) {
+                alert('Please fill in both fields.');
+                return;
+            }
+
+            // Simulate login by storing the username in localStorage
+            localStorage.setItem('loggedInUser', username);
+
+            // Redirect to the homepage
+            window.location.href = '../../index.html';
+        }
     </script>
 </head>
 <body>
@@ -79,9 +107,17 @@
     <div class="links">
         <a href="../../index.html" class="home-btn">HomePage</a>
     </div>
-    
-    <!-- React will render the login form here -->
-    <div id="root"></div>
+    <div class="form-container">
+        <form onsubmit="handleLogin(event)">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
-<footer><img src="valhiem.jpg" alt="Valhiem Image"></footer>
+<footer><img src="valhiem.jpg"></footer>
 </html>
