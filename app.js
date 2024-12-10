@@ -1,9 +1,3 @@
-export default function Profile() {
-    return (
-      <img
-        src="https://i.imgur.com/MK3eW3Am.jpg"
-        alt="Katherine Johnson"
-      />
-    )
-  }
-  
+export default function Square() {
+  return <button className="square">X</button>;
+}
