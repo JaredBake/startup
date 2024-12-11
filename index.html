@@ -147,7 +147,6 @@
         }
     </style>
 </head>
-
 <body>
     <header>
         <div class="user-info" id="user-info"></div>
@@ -155,7 +154,7 @@
             <a href="/src/login/login.html" class="login-btn" id="login-btn">Login</a>
         </div>
         <div id="username-display" style="color: white; font-size: 18px;"></div>
-        <div id="logout-btn-container">
+        <div id="logout-btn-container" style="display: none;">
             <button id="logout-btn" style="background-color: #e74c3c; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">Logout</button>
         </div>
     </header>
@@ -188,11 +187,6 @@
     </footer>
 
     <script>
-        const months = [
-            "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"
-        ];
-
         const events = {
             "January": ["January 1, 2024 - 10:00 AM", "January 10, 2024 - 2:00 PM"],
             "February": ["February 5, 2024 - 1:30 PM", "February 14, 2024 - 4:00 PM"],
@@ -253,27 +247,38 @@
 
         // Check login status and update UI
         function checkLoginStatus() {
-            const loggedInUser = localStorage.getItem('loggedInUser');
-            if (loggedInUser) {
-                userInfo.textContent = `Hello, ${loggedInUser}!`;
+            const token = localStorage.getItem('authToken');
+            if (token) {
+                userInfo.textContent = `Logged in!`;
                 loginBtn.style.display = 'none';
-                logoutBtnContainer.style.display = 'block';  // Show logout button
+                logoutBtnContainer.style.display = 'block';
             } else {
                 loginBtn.style.display = 'block';
-                logoutBtnContainer.style.display = 'none';  // Hide logout button
+                logoutBtnContainer.style.display = 'none';
             }
         }
 
-        // Logout the user
-        function handleLogout() {
-            // Remove user data from localStorage
-            localStorage.removeItem('loggedInUser');
-            // Reload the page to reflect the changes
-            window.location.reload();
-        }
+        // Handle Logout
+        logoutBtn.addEventListener('click', async () => {
+            const token = localStorage.getItem('authToken');
+            try {
+                const response = await fetch('/auth/logout', {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ token }),
+                });
 
-        // Attach the logout handler to the logout button
-        logoutBtn.addEventListener('click', handleLogout);
+                if (response.ok) {
+                    localStorage.removeItem('authToken');
+                    alert('Logout successful!');
+                    checkLoginStatus();
+                } else {
+                    alert('Logout failed.');
+                }
+            } catch (error) {
+                alert('Error during logout: ' + error.message);
+            }
+        });
 
         // Initial display
         updateMonth();

@@ -49,16 +49,6 @@
             border-radius: 5px;
         }
 
-        button {
-            padding: 10px;
-            font-size: 16px;
-            color: white;
-            background-color: #333;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
         button:hover {
             background-color: #555;
         }
@@ -78,6 +68,24 @@
             cursor: pointer;
             border-radius: 100px;
         }
+        .loginBtn{
+            padding: 10px;
+            font-size: 16px;
+            color: rgb(252, 252, 252);
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .createUserBtn{
+            padding: 10px;
+            font-size: 16px;
+            color: rgb(252, 252, 252);
+            background-color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
     <script>
         // JavaScript for handling form submission
@@ -94,12 +102,39 @@
                 return;
             }
 
-            // Simulate login by storing the username in localStorage
-            localStorage.setItem('loggedInUser', username);
+            document.getElementById('createUserBtn').addEventListener('click', async () => {
+                await createUser(email, password);
+            })
 
+            document.getElementById('loginBtn').addEventListener('click', async () => {
+                await loginUser(email, password);
+            })
+
+            loginBtn.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, password }),
+                    });
+
+                    if (response.ok) {
+                        const data = await response.json();
+                        localStorage.setItem('authToken', data.token);
+                        alert('Login successful!');
+                        checkLoginStatus();
+                    } else {
+                        alert('Login failed: ' + (await response.json()).msg);
+                    }
+                } catch (error) {
+                    alert('Error during login: ' + error.message);
+                }
+            })
             // Redirect to the homepage
             window.location.href = '../../index.html';
         }
+        // Handle Login
+        
     </script>
 </head>
 <body>
@@ -115,7 +150,8 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
-            <button type="submit">Submit</button>
+            <button type="submit" class="loginBtn">Submit</button>
+            <button type="submit" class="createUserBtn">Create</button>
         </form>
     </div>
 </body>
