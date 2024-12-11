@@ -32,3 +32,20 @@ There is a part of code that makes the sections spaced in a certain way.
 
 
     
+    You can also add middleware for handling errors that occur. Error middleware looks similar to other middleware functions, but it takes an additional err parameter that contains the error.
+
+function errorMiddlewareName(err, req, res, next)
+If you wanted to add a simple error handler for anything that might go wrong while processing HTTP requests you could add the following.
+
+app.use(function (err, req, res, next) {
+  res.status(500).send({type: err.name, message: err.message});
+});
+We can test that our error middleware is getting used by adding a new endpoint that generates an error.
+
+app.get('/error', (req, res, next) => {
+  throw new Error('Trouble in river city');
+});
+Now if we use curl to call our error endpoint we can see that the response comes from the error middleware.
+
+➜ curl localhost:8080/error
+{"type":"Error","message":"Trouble in river city"}
