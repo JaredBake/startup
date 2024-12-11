@@ -201,7 +201,10 @@
             "November": ["November 9, 2024 - 10:30 AM", "November 22, 2024 - 1:30 PM"],
             "December": ["December 12, 2024 - 10:00 AM", "December 25, 2024 - 3:30 PM"]
         };
-
+        const months = [
+            "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"
+        ];
         let currentMonthIndex = 0;
         const monthDisplay = document.getElementById('current-month');
         const dateList = document.getElementById('date-list');
@@ -257,28 +260,6 @@
                 logoutBtnContainer.style.display = 'none';
             }
         }
-
-        // Handle Logout
-        logoutBtn.addEventListener('click', async () => {
-            const token = localStorage.getItem('authToken');
-            try {
-                const response = await fetch('/auth/logout', {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token }),
-                });
-
-                if (response.ok) {
-                    localStorage.removeItem('authToken');
-                    alert('Logout successful!');
-                    checkLoginStatus();
-                } else {
-                    alert('Logout failed.');
-                }
-            } catch (error) {
-                alert('Error during logout: ' + error.message);
-            }
-        });
 
         // Initial display
         updateMonth();

@@ -88,53 +88,94 @@
         }
     </style>
     <script>
-        // JavaScript for handling form submission
-        function handleLogin(event) {
+        async function loginUser(email, password) {
+            try {
+                const response = await fetch('/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                // Read the response as text first
+                const responseText = await response.text();
+
+                // Log the raw response text for debugging
+                console.log('Response text:', responseText);
+
+                // Now parse the JSON
+                let data = {};
+                if (responseText) {
+                    try {
+                        data = JSON.parse(responseText); // Parse JSON from text
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
+                }
+
+                if (response.ok) {
+                    localStorage.setItem('authToken', data.token);
+                    alert('Login successful!');
+                    window.location.href = "../../index.html"; // Redirect to homepage after login
+                } else {
+                    alert('Login failed: ' + data.msg);
+                }
+            } catch (error) {
+                alert('Error during login: ' + error.message);
+            }
+        }
+
+        async function createUser(email, password) {
+            try {
+                const response = await fetch('auth/create', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password }),
+                });
+                // Read the response as text first
+                const responseText = await response.text();
+                // Log the raw response text for debugging
+                console.log('Response text:', responseText);
+                // Now parse the JSON only if responseText is not empty
+                let data = {};
+                if (responseText) {
+                    try {
+                        data = JSON.parse(responseText); // Parse JSON from text
+                    } catch (error) {
+                        console.error("Error parsing JSON:", error);
+                    }
+                }
+                if (response.ok) {
+                    alert('User created successfully!');
+                    window.location.href = "../../index.html"; // Redirect to homepage after user creation
+                } else {
+                    alert('User creation failed: ' + (data.msg || 'Unknown error')); // Provide a fallback error message
+                }
+            } catch (error) {
+                alert('Error during user creation: ' + error.message);
+            }
+        }
+
+
+        // Handling form submission based on button clicked
+        function handleSubmit(event, type) {
             event.preventDefault(); // Prevent form from refreshing the page
 
             // Get username and password values
-            const username = document.getElementById('username').value;
+            const email = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
             // Simple validation
-            if (!username || !password) {
+            if (!email || !password) {
                 alert('Please fill in both fields.');
                 return;
             }
 
-            document.getElementById('createUserBtn').addEventListener('click', async () => {
-                await createUser(email, password);
-            })
-
-            document.getElementById('loginBtn').addEventListener('click', async () => {
-                await loginUser(email, password);
-            })
-
-            loginBtn.addEventListener('click', async () => {
-                try {
-                    const response = await fetch('/auth/login', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, password }),
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        localStorage.setItem('authToken', data.token);
-                        alert('Login successful!');
-                        checkLoginStatus();
-                    } else {
-                        alert('Login failed: ' + (await response.json()).msg);
-                    }
-                } catch (error) {
-                    alert('Error during login: ' + error.message);
-                }
-            })
-            // Redirect to the homepage
-            window.location.href = '../../index.html';
-        }
-        // Handle Login
-        
+            if (type === 'login') {
+                loginUser(email, password);
+            } else if (type === 'create') {
+                createUser(email, password);
+            }
+        } 
     </script>
 </head>
 <body>
@@ -143,15 +184,15 @@
         <a href="../../index.html" class="home-btn">HomePage</a>
     </div>
     <div class="form-container">
-        <form onsubmit="handleLogin(event)">
+        <form >
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
             
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
             
-            <button type="submit" class="loginBtn">Submit</button>
-            <button type="submit" class="createUserBtn">Create</button>
+            <button type="button" class="loginBtn" onclick="handleSubmit(event, 'login')">Submit</button>
+            <button type="button" class="createUserBtn" onclick="handleSubmit(event, 'create')">Create</button>
         </form>
     </div>
 </body>
