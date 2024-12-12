@@ -4,7 +4,7 @@ const app = express();
 
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
-let scores = [];
+let events = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -53,3 +53,44 @@ apiRouter.delete('/auth/logout', (req, res) => {
   }
   res.status(204).end();
 });
+
+// // GetList
+// apiRouter.get('/calendar', (_req, res) => {
+//     res.send(events);
+//   });
+  
+//   // SubmitList
+//   apiRouter.post('/calendar', (req, res) => {
+//     events = updateList(req.body, events);
+//     res.send(events);
+//   });
+
+// Return the application's default page if the path is unknown
+app.use((_req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
+app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+});
+
+function updateList(newEvent, events) {
+    let found = false;
+    for (const [i, prevEvent] of events.entries()) {
+      if (newEvent.event > prevEvent.event) {
+        events.splice(i, 0, newScore);
+        found = true;
+        break;
+      }
+    }
+  
+    if (!found) {
+      events.push(newEvent);
+    }
+  
+    if (events.length > 30) {
+      events.length = 30;
+    }
+  
+    return events;
+  }

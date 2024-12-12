@@ -1,0 +1,219 @@
+header {
+  background-color: #4a90e2;
+  padding: 20px;
+  text-shadow: #050505;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.login-btn {
+  background-color: #ffffff;
+  border: 2px solid #4a90e2;
+  color: #4a90e2;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 1000px;
+  text-align: center;
+}
+.logout-btn-container {
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.github-btn {
+  background-color: #ffffff;
+  border: 2px solid #050505;
+  color: #029011;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 1000px;
+  text-align: center;
+}
+
+.container {
+  padding: 20px;
+}
+
+h1 {
+  color: #06060c;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #e1e1e1;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  color: #333;
+}
+
+.month-switcher {
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.arrow {
+  font-size: 2em;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+}
+
+.left-arrow {
+  left: 30%;
+}
+
+.right-arrow {
+  right: 30%;
+}
+
+.month-display {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.arrow:hover {
+  color: #4a90e2;
+}
+
+.add-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #4a90e2;
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 30px;
+  text-align: center;
+  line-height: 60px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover {
+  background-color: #357ab7;
+}
+
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.image-container img {
+  max-width: 50%;
+  height: auto;
+}
+
+.user-info {
+  margin-left: 20px;
+  color: white;
+}
+.body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  height: 100vh;
+}
+
+header {
+  flex: 0 80px;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+footer {
+  flex: 0 30px;
+}
+
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+}
+
+.navbar-brand {
+  padding-left: 0.3em;
+  border-bottom: solid rgb(182, 182, 182) thin;
+}
+
+menu .nav-item {
+  padding: 0 0.3em;
+}
+
+footer a {
+  float: right;
+}
+
+@media (max-height: 600px) {
+  header {
+    display: none;
+  }
+  footer {
+    display: none;
+  }
+}
+
+.backImage{
+  background-image: url("./login/valhiem.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.git-button {
+  position: fixed;
+  bottom: 10%;
+  right: 45%;
+  width: 150px;
+  height: 70px;
+  background-color: #000000;
+  border: none;
+  border-radius: 30%;
+  color: white;
+  font-size: 40px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+.git-button:hover{
+  color:red
+}
+
+.time-display { position: fixed; 
+  position: fixed;
+  top: 20px; 
+  left: 35%; 
+  background-color: #4a90e2; 
+  color: white; 
+  padding: 10px; 
+  border-radius: 5px; 
+  font-size: 1.2em; 
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}

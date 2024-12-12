@@ -29,9 +29,11 @@ Here is a sequence diagram that shows how to people would interact with the back
   - retrieving list of events
   - submitting new events
   - retrieving new events made by others
+  - deleting events
 - **DB/Login** - Store users, calenders, and events in database. Register and login users. Credentials securely stored in database. Can't create or edit event unless authenticated.
 - **WebSocket** - As each user creates a new event, their events are broadcast to all other users.
 - **React** - Application ported to use the React web framework.
+
 
 ## Recent Additions
 - **Style** - Added buttons for adding event, login, Github access.
