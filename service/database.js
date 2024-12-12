@@ -3,11 +3,11 @@ const bcrypt = require('bcrypt');
 const uuid = require('uuid');
 const config = require('../dbConfig.json');
 
-const url = `mongodb+srv://bakecs260:cs260password@bakecluster.ievjm.mongodb.net`;
+const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('startup');
 const userCollection = db.collection('user');
-const scoreCollection = db.collection('score');
+const eventCollection = db.collection('events');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -40,24 +40,24 @@ async function createUser(email, password) {
   return user;
 }
 
-async function addScore(score) {
-  return scoreCollection.insertOne(score);
+async function addEvent(event) {
+  const event = { title, date: new Date(date)};
+  const result = await userCollection.updateOne(
+    { email },
+    { $push: { events: event} }
+  );
+  return result.modifiedCount > 0 ? event : null;
 }
 
-function getHighScores() {
-  const query = { score: { $gt: 0, $lt: 900 } };
-  const options = {
-    sort: { score: -1 },
-    limit: 10,
-  };
-  const cursor = scoreCollection.find(query, options);
-  return cursor.toArray();
+async function getEvents(email){
+  const user = await userCollection.findOne({email});
+  return user ? user.events : [];
 }
 
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
-  addScore,
-  getHighScores,
+  addEvent,
+  getEvents,
 };
