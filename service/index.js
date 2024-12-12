@@ -90,31 +90,25 @@ secureApiRouter.use(async (req, res, next) => {
 //   });
 
 // Return the application's default page if the path is unknown
+// Default error handler
+app.use(function (err, req, res, next) {
+  res.status(500).send({ type: err.name, message: err.message });
+});
+
+// Return the application's default page if the path is unknown
 app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-app.listen(port, () => {
+// setAuthCookie in the HTTP response
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict',
+  });
+}
+
+const httpService = app.listen(port, () => {
   console.log(`Listening on port ${port}`);
 });
-
-function updateList(newEvent, events) {
-    let found = false;
-    for (const [i, prevEvent] of events.entries()) {
-      if (newEvent.event > prevEvent.event) {
-        events.splice(i, 0, newScore);
-        found = true;
-        break;
-      }
-    }
-  
-    if (!found) {
-      events.push(newEvent);
-    }
-  
-    if (events.length > 30) {
-      events.length = 30;
-    }
-  
-    return events;
-  }

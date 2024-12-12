@@ -40,24 +40,8 @@ async function createUser(email, password) {
   return user;
 }
 
-async function addEvent(event) {
-  const event = { title, date: new Date(date)};
-  const result = await userCollection.updateOne(
-    { email },
-    { $push: { events: event} }
-  );
-  return result.modifiedCount > 0 ? event : null;
-}
-
-async function getEvents(email){
-  const user = await userCollection.findOne({email});
-  return user ? user.events : [];
-}
-
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
-  addEvent,
-  getEvents,
 };
