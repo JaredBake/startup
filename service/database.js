@@ -1,9 +1,9 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcrypt');
 const uuid = require('uuid');
-const config = require('../dbConfig.json');
+const config = require('./dbConfig.json');
 
-const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
+const url = `mongodb+srv://bakecs260:cs260password@bakecluster.ievjm.mongodb.net`;
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
@@ -40,8 +40,24 @@ async function createUser(email, password) {
   return user;
 }
 
+async function addEvent(event){
+  return eventCollection.insertOne(event);
+}
+
+function getEvents(){
+  const query = { event: { $gt: 0, $lt: 900 } };
+  const options = {
+    sort: { event: -1 },
+    limit: 50,
+  };
+  const cursor = eventCollection.find(query, options);
+  return cursor.toArray();
+}
+
 module.exports = {
   getUser,
   getUserByToken,
   createUser,
+  getEvents,
+  addEvent,
 };

@@ -6,7 +6,7 @@ const DB = require('./database.js');
 
 const authCookieName = 'token';
 
-// The scores and users are saved in memory and disappear whenever the service is restarted.
+// The events and users are saved in memory and disappear whenever the service is restarted.
 let users = {};
 let events = {};
 
@@ -78,16 +78,19 @@ secureApiRouter.use(async (req, res, next) => {
   }
 });
 
-// // GetList
-// apiRouter.get('/calendar', (_req, res) => {
-//     res.send(events);
-//   });
+// GetList
+secureApiRouter.get('/calendars', async (_req, res) => {
+  const events = await DB.getEvents();
+  res.send(events);
+});
   
-//   // SubmitList
-//   apiRouter.post('/calendar', (req, res) => {
-//     events = updateList(req.body, events);
-//     res.send(events);
-//   });
+  // SubmitList
+  secureApiRouter.post('/calendars', async (req, res) => {
+    const event = { ...req.body, ip: req.ip };
+    await DB.addEvent(event);
+    const events = await DB.getEvents();
+    res.send(events);
+  });
 
 // Return the application's default page if the path is unknown
 // Default error handler
